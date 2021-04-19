@@ -107,7 +107,7 @@ button {
   border: 1px solid transparent;
   color: var(--fc-medium);
   border-color: var(--powder-400);
-  background-color: burlywood;
+  background-color: lightgray;
   float: left;
 }
 
