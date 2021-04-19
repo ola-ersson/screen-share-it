@@ -4,7 +4,7 @@
   "description": "sample signaling server for webrtc demo",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node server/app.js"
   },
   "dependencies": {
     "express": "^4.16.2",
