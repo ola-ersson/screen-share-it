@@ -1,25 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width" />
     <title>Screen Share IT</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css" />
 
-    <!-- webRTC-lab imports bellow-->
-    <link
-      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
-      rel="stylesheet"
-    />
-    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
-    <!-- webRTC-lab imports above-->
-
-    <!-- Bilal script code bellow -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script src="scripts/jquery-3.4.1.min.js"></script>
     <!-- <script src="scripts/jquery.signalR-2.2.2.min.js"></script> -->
@@ -28,197 +13,98 @@
     <script src="scripts/app.js"></script>
 
     <script>
-        
-        $(function () {
-            
-            const urlParams = new URLSearchParams(window.location.search);
-            
-            var meeting_id = urlParams.get('mid');
+      $(function () {
+        const urlParams = new URLSearchParams(window.location.search);
 
-            if (!meeting_id) {
-                var murl = window.location.origin + "?mid=" +  (new Date()).getTime();
-                $('#meetingid').attr('href',murl).text(murl);
-                $("#meetingContainer").hide();
-                $("#meetingbox").show();
-                return;
-            }
+        var meeting_id = urlParams.get('mid');
 
-            var user_id = urlParams.get('uid');
-            if (!user_id) {
-                user_id = window.prompt('Enter your nick!');
-            }
+        if (!meeting_id) {
+          var murl = window.location.origin + '?mid=' + new Date().getTime();
+          $('#meetingid').attr('href', murl).text(murl);
+          $('#meetingContainer').hide();
+          $('#meetingbox').show();
+          return;
+        }
 
-            if (!user_id || !meeting_id) {
-                alert('user id or meeting id missing');
-                return;
-            }
-            $("#meetingContainer").show();
-            $("#meetingbox").hide();
+        var user_id = urlParams.get('uid');
+        if (!user_id) {
+          user_id = window.prompt('Enter your nick!');
+        }
 
-            MyApp._init(user_id,meeting_id);
+        if (!user_id || !meeting_id) {
+          alert('user id or meeting id missing');
+          return;
+        }
+        $('#meetingContainer').show();
+        $('#meetingbox').hide();
 
-        });
+        MyApp._init(user_id, meeting_id);
+      });
     </script>
-    <!-- Bilal script code above -->
+  </head>
+  <body>
+    <div id="meetingbox" style="display: none">
+      <p>
+        It seems you are not trying to join any meeting! You may start a new
+        meeting. Here is generated for you. <a id="meetingid" href="#"></a>
+      </p>
+    </div>
 
-    <body>
-
-      <!-- auth modals html code bellow -->
-      <div class="auth-wrapper">
-        <div class="auth-modal">
-          <h2>Login</h2>
-          <form class="login">
-            <input type="text" name="email" placeholder="Email">
-            <input type="text" name="password" placeholder="Password">
-            <button>Login</button>
-            <button class="cancel-btn" type="button">Avbryt</button>
-            <p class="error"></p>
-          </form>
-          <div>No account?
-            <a class="switch">Register an account</a>
-          </div>
-        </div>
-        <div class="auth-modal">
-          <h2>Register</h2>
-          <form class="register">
-            <input type="text" name="email" placeholder="Email">
-            <input type="text" name="password" placeholder="Password">
-            <button>Register</button>
-            <button class="cancel-btn" type="button">Avbryt</button>
-            <p class="error"></p>
-          </form>
-          <div>Got an account?
-            <a class="switch">Go to login</a>
-          </div>
-        </div>
-      </div>
-
-      <header>
-        <nav>
-          <a class="sign-in">Sign In</a>
-          <a class="sign-out">Sign Out</a>
-        </nav>
-        
-      </header>
-      <section class="content">
-        <!-- auth modals html code above -->
-
-        <!-- Bilal html code bellow -->
-    <div id="bilal-wrapper">
-      <div id="meetingbox" style="display: none;">
-          <p>It seems you are not trying to join any meeting!
-              You may start a new meeting. Here is generated for you.  <a id='meetingid' href="#"></a>
-          </p>
-      </div>
-  
-      <div id="meetingContainer" style="display: none;">
-          <h1 id='meetingname'></h1>
-          <div>
-              <div style="width:200px;height:300px;float:left;overflow-y: scroll;display:none" id="messages">
-                  <div><input type="text" id="msgbox" /><button id="btnsend">Send</button></div>
-              </div>
-              <div id='divUsers' style="display:none">
-                  <div id="me" class="userbox">
-                      <h2></h2>
-                      <div>
-                          <video autoplay muted id="localVideoCtr" />
-                      </div>
-                  </div>
-                  <div id="otherTemplate" class="userbox" style="display:none">
-                      <h2></h2>
-                      <div>
-                          <video autoplay muted id="remoteVideoCtr111"></video>
-                          <audio autoplay controls style="display:none" id="remoteAudioCtr111"></audio>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      
-          <div style="clear: both;"></div>
-          <div class="toolbox" style="display:none">
-              <button id="btnMuteUnmute">UnMute</button>
-              <button id="btnStartStopCam">Start Camera</button>
-              <button id="btnStartStopScreenshare">Screen Share</button>
-              <button id="btnResetMeeting">Reset Meeting</button>
-          </div>
-      </div></div>
-      <!-- Bilal html code above -->
-
-        <!-- webRTC-lab html code bellow -->
-        <div id="rtclab-wrapper">
-        <div id="buttons">
-          <button id="cameraBtn">Open camera & microphone</button>
-          <button disabled id="createBtn">Create room</button>
-          <button disabled id="joinBtn">Join room</button>
-          <button disabled id="hangupBtn">Hangup</button>
-        </div>
-        <div>
-          <span id="currentRoom"></span>
-        </div>
-        <div id="videos">
-          <video id="localVideo" muted autoplay playsinline></video>
-          <video id="remoteVideo" autoplay playsinline></video>
-        </div>
+    <div id="meetingContainer" style="display: none">
+      <h1 id="meetingname"></h1>
+      <div>
         <div
-          class="mdc-dialog"
-          id="room-dialog"
-          role="alertdialog"
-          aria-modal="true"
-          aria-labelledby="my-dialog-title"
-          aria-describedby="my-dialog-content"
+          style="
+            width: 200px;
+            height: 300px;
+            float: left;
+            overflow-y: scroll;
+            display: none;
+          "
+          id="messages"
         >
-          <div class="mdc-dialog__container">
-            <div class="mdc-dialog__surface">
-              <h2 class="mdc-dialog__title" id="my-dialog-title">Join room</h2>
-              <div class="mdc-dialog__content" id="my-dialog-content">
-                Enter ID for room to join:
-                <div class="mdc-text-field">
-                  <input type="text" id="room-id" class="mdc-text-field__input" />
-                  <label class="mdc-floating-label" for="my-text-field"
-                    >Room ID</label
-                  >
-                  <div class="mdc-line-ripple"></div>
-                </div>
-              </div>
-              <footer class="mdc-dialog__actions">
-                <button
-                  type="button"
-                  class="mdc-button mdc-dialog__button"
-                  data-mdc-dialog-action="no"
-                >
-                  <span class="mdc-button__label">Cancel</span>
-                </button>
-                <button
-                  id="confirmJoinBtn"
-                  type="button"
-                  class="mdc-button mdc-dialog__button"
-                  data-mdc-dialog-action="yes"
-                >
-                  <span class="mdc-button__label">Join</span>
-                </button>
-              </footer>
+          <div>
+            <input type="text" id="msgbox" /><button id="btnsend">Send</button>
+          </div>
+        </div>
+        <div id="divUsers" style="display: none">
+          <div id="me" class="userbox">
+            <h2></h2>
+            <div>
+              <video autoplay muted id="localVideoCtr" />
             </div>
           </div>
-          <div class="mdc-dialog__scrim"></div>
+          <div id="otherTemplate" class="userbox" style="display: none">
+            <h2></h2>
+            <div>
+              <video autoplay muted id="remoteVideoCtr111"></video>
+              <audio
+                autoplay
+                controls
+                style="display: none"
+                id="remoteAudioCtr111"
+              ></audio>
+            </div>
+          </div>
         </div>
       </div>
-      <!-- webRTC-lab html code above -->
-      
-    </section>
-      <!-- The core Firebase JS SDK is always required and must be listed first -->
-      <script src="/__/firebase/8.3.3/firebase-app.js"></script>
-      <script src="/__/firebase/8.3.3/firebase-analytics.js"></script>
-      <script src="/__/firebase/8.3.3/firebase-auth.js"></script>
-      <script src="/__/firebase/8.3.3/firebase-firestore.js"></script>
-      <script src="/__/firebase/8.3.3/firebase-functions.js"></script>
 
-      <!-- Initialize Firebase -->
-      <script src="/__/firebase/init.js"></script>
-      <script src="js/app.js"></script>
-      <script src="js/auth.js"></script>
-      <!-- webRTC-lab js file import bellow -->
-      <script src="js/webrtc-lab.js"></script>
-      <!-- webRTC-lab js file import above -->
-    </body>
+      <div style="clear: both"></div>
+      <div class="toolbox" style="display: none">
+        <button id="btnMuteUnmute">UnMute</button>
+        <button id="btnStartStopCam">Start Camera</button>
+        <button id="btnStartStopScreenshare">Screen Share</button>
+        <button id="btnResetMeeting">Reset Meeting</button>
+      </div>
+    </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/8.3.3/firebase-app.js"></script>
+    <script src="/__/firebase/8.3.3/firebase-analytics.js"></script>
+    <script src="/__/firebase/8.3.3/firebase-auth.js"></script>
+    <script src="/__/firebase/8.3.3/firebase-firestore.js"></script>
+    <script src="/__/firebase/8.3.3/firebase-functions.js"></script>
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+    <script src="js/app.js"></script>
+  </body>
 </html>
-    
