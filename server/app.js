@@ -1,11 +1,13 @@
 const express = require('express');
+var cors = require('cors');
 const app = express();
+app.use(cors());
+
+//Listen on port 3000
+var port = process.env.PORT || 3000;
+server = app.listen(port);
 
 var _userConnections = [];
-
-var port = process.env.PORT || 3000;
-//Listen on port 3000
-server = app.listen(port);
 
 //routes
 app.get('/', (req, res) => {
