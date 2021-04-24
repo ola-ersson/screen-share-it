@@ -4,7 +4,7 @@
   "description": "sample signaling server for webrtc demo",
   "main": "app.js",
   "scripts": {
-    "start": "node server/app.js"
+    "start": "nodemon server/app.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
