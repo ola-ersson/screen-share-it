@@ -1,114 +1,114 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Screen Share IT</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-    <body>
-      <header>
-        <nav>
-          <a class="sign-in">Sign In</a>
-          <a class="sign-out">Sign Out</a>
-        </nav>
-        
-      </header>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a class="sign-in">Sign In</a>
+        <a class="sign-out">Sign Out</a>
+      </nav>
+    </header>
 
-
-      
-      <main class="content">
-
-    <!-- auth modals html code bellow -->
-    <div class="auth-wrapper">
-      <div class="auth-modal">
-        <h2>Login</h2>
-        <form class="login">
-          <input type="text" name="email" placeholder="Email">
-          <input type="text" name="password" placeholder="Password">
-          <button>Login</button>
-          <button class="cancel-btn" type="button">Avbryt</button>
-          <p class="error"></p>
-        </form>
-        <div>No account?
-          <a class="switch">Register an account</a>
+    <main class="content">
+      <!-- auth modals html code bellow -->
+      <div class="auth-wrapper">
+        <div class="auth-modal">
+          <h2>Login</h2>
+          <form class="login">
+            <input type="text" name="email" placeholder="Email" />
+            <input type="text" name="password" placeholder="Password" />
+            <button>Login</button>
+            <button class="cancel-btn" type="button">Avbryt</button>
+            <p class="error"></p>
+          </form>
+          <div>
+            No account?
+            <a class="switch">Register an account</a>
+          </div>
+        </div>
+        <div class="auth-modal">
+          <h2>Register</h2>
+          <form class="register">
+            <input type="text" name="email" placeholder="Email" />
+            <input type="text" name="password" placeholder="Password" />
+            <button>Register</button>
+            <button class="cancel-btn" type="button">Avbryt</button>
+            <p class="error"></p>
+          </form>
+          <div>
+            Got an account?
+            <a class="switch">Go to login</a>
+          </div>
         </div>
       </div>
-      <div class="auth-modal">
-        <h2>Register</h2>
-        <form class="register">
-          <input type="text" name="email" placeholder="Email">
-          <input type="text" name="password" placeholder="Password">
-          <button>Register</button>
-          <button class="cancel-btn" type="button">Avbryt</button>
-          <p class="error"></p>
-        </form>
-        <div>Got an account?
-          <a class="switch">Go to login</a>
+      <!-- auth modals html code above -->
+
+      <!-- screen share it html code bellow -->
+      <section>
+        <div class="room-box" style="display: none">
+          <p>
+            It seems you are not trying to join any meeting! You may start a new
+            meeting. Here is generated for you.
+            <a class="room-link" href="#"></a>
+          </p>
         </div>
-                </div>
-    </div>
-        <!-- auth modals html code above -->
-
-        <!-- screen share it html code bellow -->
-        <section>
-              <div class="room-box" style="display: none">
-                  <p>
-                  It seems you are not trying to join any meeting! You may start a new
-                  meeting. Here is generated for you. <a class="room-link" href="#"></a>
-                </p>
-              </div>
-              <div class="room-container" style="display: none">
-                <h1 class="room-name"></h1>
+        <div class="room-container" style="display: none">
+          <div class="whatever-wrapper">
+            <h1 class="room-name"></h1>
+            <div class="tool-box" style="display: none">
+              <button id="btn-screenshare">Screen Share</button>
+            </div>
+          </div>
+          </div>
+          <div>
+            <div id="users" style="display: none">
+              <div class="user-box">
+                <h2>You</h2>
                 <div>
-                  <div id="users" style="display: none">
-                    <div class="user-box">
-                      <h2>You</h2>
-                      <div>
-                        <video autoplay muted id="localVideoCtr" />
-                      </div>
-                    </div>
-                    <div id="other-template" class="user-box" style="display: none">
-                      <h2></h2>
-                      <div>
-                        <video autoplay muted id="remoteVideoCtr111"></video>
-                        <audio
-                          autoplay
-                          controls
-                          style="display: none"
-                          id="remoteAudioCtr111"
-                                ></audio>
-                      </div>
-                    </div>
-                  </div>
+                  <video autoplay muted id="localVideoCtr" />
                 </div>
               </div>
-                <div style="clear: both"></div>
-                      <div class="tool-box" style="display: none">
-                        <button id="btn-screenshare">Screen Share</button>
-                      </div>
- 
-              
-        </section>
-        <!-- screen share it html code above -->
-      
+              <div id="other-template" class="user-box" style="display: none">
+                <h2></h2>
+                <div>
+                  <video autoplay muted id="remoteVideoCtr111"></video>
+                  <audio
+                    autoplay
+                    controls
+                    style="display: none"
+                    id="remoteAudioCtr111"
+                  ></audio>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="clear: both"></div>
+      </section>
+      <!-- screen share it html code above -->
     </main>
-      <!-- The core Firebase JS SDK is always required and must be listed first -->
-      <script src="/__/firebase/8.3.3/firebase-app.js"></script>
-      <script src="/__/firebase/8.3.3/firebase-analytics.js"></script>
-      <script src="/__/firebase/8.3.3/firebase-auth.js"></script>
-      <script src="/__/firebase/8.3.3/firebase-firestore.js"></script>
-      <script src="/__/firebase/8.3.3/firebase-functions.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/8.3.3/firebase-app.js"></script>
+    <script src="/__/firebase/8.3.3/firebase-analytics.js"></script>
+    <script src="/__/firebase/8.3.3/firebase-auth.js"></script>
+    <script src="/__/firebase/8.3.3/firebase-firestore.js"></script>
+    <script src="/__/firebase/8.3.3/firebase-functions.js"></script>
 
-      <!-- Initialize Firebase -->
-      <script src="/__/firebase/init.js"></script>
-      <!-- <script src="js/app.js"></script> -->
-      <script src="js/auth.js"></script>
-      <!-- screen share it js file import bellow -->
-      <script src="js/webrtc.js"></script>
-      <script src="js/socket.js"></script>
-      <script src="js/app.js"></script>
-      <!-- screen share it js file import above -->
-    </body>
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+    <!-- <script src="js/app.js"></script> -->
+    <script src="js/auth.js"></script>
+    <!-- screen share it js file import bellow -->
+    <script src="js/webrtc.js"></script>
+    <script src="js/socket.js"></script>
+    <script src="js/app.js"></script>
+    <!-- screen share it js file import above -->
+  </body>
 </html>

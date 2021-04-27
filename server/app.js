@@ -38,17 +38,20 @@ io.on('connection', (socket) => {
   }); //end of exchangeSDP
 
   socket.on('disconnect', function () {
-    var userObj = userConnections.find((p) => p.connectionId == socket.id);
+    console.log('disconnect');
+    let userObj = userConnections.find((user) => user.socketId == socket.id);
     if (userObj) {
-      var meetingId = userObj.meeting_id;
+      let roomId = userObj.roomId;
 
       userConnections = userConnections.filter(
-        (p) => p.connectionId != socket.id
+        (user) => user.socketId != socket.id
       );
-      var list = userConnections.filter((p) => p.meeting_id == meetingId);
+      let list = userConnections.filter((user) => user.roomId == roomId);
 
-      list.forEach((v) => {
-        socket.to(v.connectionId).emit('informAboutConnectionEnd', socket.id);
+      list.forEach((userInRoom) => {
+        socket
+          .to(userInRoom.socketId)
+          .emit('informAboutConnectionEnd', socket.id);
       });
     }
   });

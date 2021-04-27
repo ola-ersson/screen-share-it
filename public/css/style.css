@@ -2,14 +2,8 @@
   box-sizing: border-box;
 }
 
-/* body {
-  margin: 0;
-  background: lightcoral;
-} */
-
 body,
 h1,
-h2,
 p,
 a,
 input {
@@ -17,11 +11,16 @@ input {
   text-decoration: none;
 }
 
+h2 {
+  color: white;
+  text-transform: capitalize;
+}
+
 header {
   width: 100%;
   padding: 20px;
   text-align: right;
-  background: lightblue;
+  background-color: rgb(90, 71, 71);
 }
 
 header a {
@@ -32,12 +31,14 @@ header a {
 }
 
 header a:hover {
-  background: lightcoral;
+  background: white;
   color: black;
 }
 
 .sign-in {
   display: inline-block;
+  background-color: yellow;
+  color: black;
 }
 .sign-out {
   display: none;
@@ -102,17 +103,26 @@ button {
 .user-box {
   margin-left: 20px;
   padding: 8px;
-  width: 450px;
-  /* height:366px; */
+  margin-bottom: 20px;
   border: 2px solid black;
   background-color: rgb(90, 71, 71);
   float: left;
 }
 .user-box video {
-  display: inline-block;
-  border: 1px solid black;
   margin: 0;
   padding: 0;
-  width: 450px;
-  height: 300px;
+  max-width: 500px;
+  min-height: 300px;
+}
+.room-container h2 {
+  color: white;
+  text-transform: capitalize;
+}
+.whatever-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.tool-box {
+  margin-left: 20px;
 }
