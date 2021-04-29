@@ -62,12 +62,12 @@ let Webrtc = (function () {
   async function RemoveAudioVideoSenders(rtpSenders) {
     for (let id in peerConnectionIds) {
       if (rtpSenders[id] && IsConnectionAvailable(peerConnections[id])) {
-        console.log('69 - rtpSenders[id]: ', rtpSenders[id]);
-        console.log('70 - peerConnections[id]: ', peerConnections[id]);
+        //console.log('69 - rtpSenders[id]: ', rtpSenders[id]);
+        //console.log('70 - peerConnections[id]: ', peerConnections[id]);
         peerConnections[id].removeTrack(rtpSenders[id]);
-        console.log('72 - rtpSenders[id]: ', rtpSenders[id]);
+        //console.log('72 - rtpSenders[id]: ', rtpSenders[id]);
         rtpSenders[id] = null;
-        console.log('74 - rtpSenders[id]: ', rtpSenders[id]);
+        //console.log('74 - rtpSenders[id]: ', rtpSenders[id]);
       }
     }
   }
