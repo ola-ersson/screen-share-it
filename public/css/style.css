@@ -7,13 +7,14 @@ h1,
 p,
 a,
 input {
-  color: darkslategray;
+  color: white;
   text-decoration: none;
 }
 
 h2 {
   color: white;
   text-transform: capitalize;
+  margin: 0;
 }
 
 header {
@@ -53,12 +54,88 @@ input {
 }
 
 button {
-  margin-top: 10px;
-  padding: 8px 12px;
-  background: yellow;
-  border: 0;
+  text-align: center;
+  text-decoration: none;
+  color: white;
   font-weight: bold;
   cursor: pointer;
+  border: none;
+  border-radius: 12px;
+}
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+#create-roomBtn {
+  background-color: #525252;
+  height: 38px;
+  width: 180px;
+  margin: 1rem;
+  border-bottom:4px solid #312f2f;
+  border-left:1px solid #312f2f;
+}
+#create-roomBtn:hover {
+  background-color:#665d74;
+}
+#create-roomBtn:active {
+  background-color:#302f2f;
+  border-width:0px;
+}
+#roomsBtn {
+  position: relative;
+  background-color: #525252;
+  height: 38px;
+  width: 100px;
+  margin: 1rem;
+  border-bottom:4px solid #312f2f;
+}
+#roomsBtn:hover {
+  background-color:#665d74;
+}
+#roomsBtn:active {
+  background-color:#302f2f;
+  border-width:0px;
+}
+#bannerOverButton {
+  position: absolute;
+  background-color: red;
+  width: 86px;
+  height: 20px;
+  z-index: -2;
+  top: 0px;
+  left: 10;
+  padding: 2px;
+  border-radius: 12px;
+  transition: 0.2s;
+}
+#roomsBtn:hover #bannerOverButton {
+  top: 40px;
+  height: auto;
+}
+
+#btn-screenshare {
+  background-color: #494255;
+  height: 38px;
+  width: 180px;
+  margin: auto; 
+  padding: 0px;
+  border-bottom:4px solid #25202c;
+  border-radius:12px;
+  -webkit-transition: background-color 250ms ease-out, ;
+  -moz-transition: background-color 250ms ease-out;
+  -o-transition: background-color 250ms ease-out;
+  transition: background-color 250ms ease-out;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+#btn-screenshare:hover {
+  background-color:#665d74;
+}
+#btn-screenshare:active {
+  background-color:#423950;
+  border-width:0px;
 }
 
 /* auth styles */
@@ -100,19 +177,27 @@ button {
 }
 
 /* screen-share css */
+
 .user-box {
   margin-left: 20px;
   padding: 8px;
   margin-bottom: 20px;
-  border: 2px solid black;
-  background-color: rgb(90, 71, 71);
+  border-radius: 12px;
+  background-color: #525252;
   float: left;
+  justify-content: center;
+  height:400px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 .user-box video {
   margin: 0;
   padding: 0;
   max-width: 500px;
   min-height: 300px;
+}
+.room-container {
+  color: white;
+  text-transform: capitalize;
 }
 .room-container h2 {
   color: white;
@@ -124,5 +209,5 @@ button {
   align-items: center;
 }
 .tool-box {
-  margin-left: 20px;
+ 
 }

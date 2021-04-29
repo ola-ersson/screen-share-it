@@ -3,22 +3,22 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Screen Share IT</title>
+    <title>SSI</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
   </head>
   <body>
-    <header>
+    <!-- <header>
       <nav>
         <a class="sign-in">Sign In</a>
         <a class="sign-out">Sign Out</a>
       </nav>
-    </header>
+    </header> -->
 
     <main class="content">
       <!-- auth modals html code bellow -->
-      <div class="auth-wrapper">
+      <!-- <div class="auth-wrapper">
         <div class="auth-modal">
           <h2>Login</h2>
           <form class="login">
@@ -47,45 +47,39 @@
             <a class="switch">Go to login</a>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- auth modals html code above -->
 
       <!-- screen share it html code bellow -->
-      <section>
+      <section class="site-container">
         <div class="room-box" style="display: none">
-          <p>
-            It seems you are not trying to join any meeting! You may start a new
-            meeting. Here is generated for you.
-            <a class="room-link" href="#"></a>
-          </p>
+          <div class="buttonContainer">
+          <button id="create-roomBtn" class="dashboardBtn"><a class="room-link" href="#">CREATE ROOM</a></button>
+          <button id="roomsBtn" class="dashboardBtn"><div id="bannerOverButton">Coming soon</div><a href="#">ROOMS</a></button>         
         </div>
+      </div>
         <div class="room-container" style="display: none">
           <div class="whatever-wrapper">
             <h1 class="room-name"></h1>
-            <div class="tool-box" style="display: none">
-              <button id="btn-screenshare">Screen Share</button>
-            </div>
+            
           </div>
           </div>
           <div>
-            <div id="users" style="display: none">
+            <div id="users" class="site-container" style="display: none">
               <div class="user-box">
-                <h2>You</h2>
+                <h2 id="me" class="users-name">You</h2>
                 <div>
-                  <video autoplay muted id="localVideoCtr" />
+                  <video autoplay muted id="localVideoCtr"  />
+                </div>
+                <div class="tool-box" style="display: none">
+                  <button id="btn-screenshare">Screen Share</button>
                 </div>
               </div>
               <div id="other-template" class="user-box" style="display: none">
                 <h2></h2>
-                <div>
-                  <video autoplay muted id="remoteVideoCtr111"></video>
-                  <audio
-                    autoplay
-                    controls
-                    style="display: none"
-                    id="remoteAudioCtr111"
-                  ></audio>
-                </div>
+                
+                  <video autoplay muted id="remoteVideoCtr111" />
+                
               </div>
             </div>
           </div>

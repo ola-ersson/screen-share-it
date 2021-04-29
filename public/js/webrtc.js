@@ -1,8 +1,8 @@
 let Webrtc = (function () {
   const iceConfiguration = {
     iceServers: [
-      { urls: 'stun:stun.l.google.com:19302' },
-      { urls: 'stun:stun1.l.google.com:19302' },
+      { urls: "stun:stun.l.google.com:19302" },
+      { urls: "stun:stun1.l.google.com:19302" },
     ],
   };
 
@@ -20,32 +20,31 @@ let Webrtc = (function () {
   async function init(server_function, my_socket_id) {
     mySocketId = my_socket_id;
     serverFunction = server_function;
-    localVideoPlayer = document.getElementById('localVideoCtr');
+    localVideoPlayer = document.getElementById("localVideoCtr");
     eventBinding();
   }
 
   function eventBinding() {
     document
-      .querySelector('#btn-screenshare')
-      .addEventListener('click', async function () {
+      .querySelector("#btn-screenshare")
+      .addEventListener("click", async function () {
         if (screenShare == true) {
-          document.querySelector('#btn-screenshare').textContent =
-            'Screen Share';
+          document.querySelector("#btn-screenshare").textContent =
+            "Screen Share";
           screenShare = false;
           videoCamSSTrack.stop();
-          videoCamSSTrack = null;
           localVideoPlayer.srcObject = null;
           RemoveAudioVideoSenders(rtpVideoSenders);
           return;
         }
         try {
-          document.querySelector('#btn-screenshare').textContent =
-            'Stop Screen Share';
+          document.querySelector("#btn-screenshare").textContent =
+            "Stop Screen Share";
           screenShare = true;
           let vstream = null;
           vstream = await navigator.mediaDevices.getDisplayMedia({
-            video: true,
-            audio: false,
+            width: { min: 4096 },
+            height: { min: 2160 },
           });
           if (vstream.getVideoTracks().length > 0) {
             videoCamSSTrack = vstream.getVideoTracks()[0];
@@ -62,12 +61,8 @@ let Webrtc = (function () {
   async function RemoveAudioVideoSenders(rtpSenders) {
     for (let id in peerConnectionIds) {
       if (rtpSenders[id] && IsConnectionAvailable(peerConnections[id])) {
-        console.log('69 - rtpSenders[id]: ', rtpSenders[id]);
-        console.log('70 - peerConnections[id]: ', peerConnections[id]);
         peerConnections[id].removeTrack(rtpSenders[id]);
-        console.log('72 - rtpSenders[id]: ', rtpSenders[id]);
         rtpSenders[id] = null;
-        console.log('74 - rtpSenders[id]: ', rtpSenders[id]);
       }
     }
   }
@@ -106,18 +101,18 @@ let Webrtc = (function () {
       if (!remoteAudioStreams[socket_id])
         remoteAudioStreams[socket_id] = new MediaStream();
 
-      if (event.track.kind == 'video') {
+      if (event.track.kind == "video") {
         remoteVideoStreams[socket_id]
           .getVideoTracks()
           .forEach((t) => remoteVideoStreams[socket_id].removeTrack(t));
         remoteVideoStreams[socket_id].addTrack(event.track);
 
-        let remoteVideoPlayer = document.getElementById('v_' + socket_id);
+        let remoteVideoPlayer = document.getElementById("v_" + socket_id);
         remoteVideoPlayer.srcObject = null;
         remoteVideoPlayer.srcObject = remoteVideoStreams[socket_id];
         remoteVideoPlayer.load();
-      } else if (event.track.kind == 'audio') {
-        let remoteAudioPlayer = document.getElementById('a_' + socket_id);
+      } else if (event.track.kind == "audio") {
+        let remoteAudioPlayer = document.getElementById("a_" + socket_id);
         remoteAudioStreams[socket_id]
           .getVideoTracks()
           .forEach((t) => _remoteAudioStreams[socket_id].removeTrack(t));
@@ -181,9 +176,9 @@ let Webrtc = (function () {
   function IsConnectionAvailable(connection) {
     if (
       connection &&
-      (connection.connectionState == 'new' ||
-        connection.connectionState == 'connecting' ||
-        connection.connectionState == 'connected')
+      (connection.connectionState == "new" ||
+        connection.connectionState == "connecting" ||
+        connection.connectionState == "connected")
     ) {
       return true;
     } else return false;
@@ -210,6 +205,7 @@ let Webrtc = (function () {
       remoteVideoStreams[socket_id] = null;
     }
   }
+
 
   return {
     init: async function (server_function, my_socket_id) {
