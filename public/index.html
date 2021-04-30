@@ -6,6 +6,10 @@
     <title>SSI</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <script src="https://kit.fontawesome.com/77f9a0ac97.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
   </head>
   <body>
@@ -55,7 +59,7 @@
         <div class="room-box" style="display: none">
           <div class="buttonContainer">
           <button id="create-roomBtn" class="dashboardBtn"><a class="room-link" href="#">CREATE ROOM</a></button>
-          <button id="roomsBtn" class="dashboardBtn"><div id="bannerOverButton">Coming soon</div><a href="#">ROOMS</a></button>         
+          <button id="roomsBtn" class="dashboardBtn"><div id="bannerOverButton">Coming soon</div>ROOMS</button>         
         </div>
       </div>
         <div class="room-container" style="display: none">
@@ -66,21 +70,21 @@
           </div>
           <div>
             <div id="users" class="site-container" style="display: none">
-              <div class="user-box">
-                <h2 id="me" class="users-name">You</h2>
-                <div>
-                  <video autoplay muted id="localVideoCtr"  />
+              
+                <div class="user-box">
+                  <video autoplay muted id="localVideoCtr"  ></video>
+              <div class="tool-box" style="display: none"><div class="usersInfo"><h2 class="users-name">You</h2></div>
+                  <button id="btn-screenshare"><i class="fas fa-desktop"></i></button>
                 </div>
-                <div class="tool-box" style="display: none">
-                  <button id="btn-screenshare">Screen Share</button>
-                </div>
+               
+                
               </div>
+              
               <div id="other-template" class="user-box" style="display: none">
-                <h2></h2>
-                
-                  <video autoplay muted id="remoteVideoCtr111" />
-                
+                  <video autoplay muted id="remoteVideoCtr111" ></video>
+                  <div class="usersInfo"><h2 class="users-name"></h2></div>
               </div>
+            
             </div>
           </div>
         </div>

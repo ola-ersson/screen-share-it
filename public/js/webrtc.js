@@ -29,8 +29,6 @@ let Webrtc = (function () {
       .querySelector("#btn-screenshare")
       .addEventListener("click", async function () {
         if (screenShare == true) {
-          document.querySelector("#btn-screenshare").textContent =
-            "Screen Share";
           screenShare = false;
           videoCamSSTrack.stop();
           localVideoPlayer.srcObject = null;
@@ -38,8 +36,6 @@ let Webrtc = (function () {
           return;
         }
         try {
-          document.querySelector("#btn-screenshare").textContent =
-            "Stop Screen Share";
           screenShare = true;
           let vstream = null;
           vstream = await navigator.mediaDevices.getDisplayMedia({

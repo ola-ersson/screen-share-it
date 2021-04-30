@@ -26,5 +26,21 @@ function appInit() {
   roomContainer.style.display = 'block';
   roomBox.style.display = 'none';
   Socket.init(userId, roomId);
+
+
+/* userId = null;
+roomId = null;
+document
+  .querySelector('#create-roomBtn')
+  .addEventListener('click', () => createRoomName());
+function createRoomName() {
+  roomId = window.prompt('Enter room name');
+  userId = window.prompt('Enter user name');
+  Socket.init(userId, roomId);
+} */
 }
+
 appInit();
+
+
+
