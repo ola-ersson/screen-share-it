@@ -116,11 +116,12 @@ let Webrtc = (function () {
         remoteVideoPlayer.srcObject = null;
         remoteVideoPlayer.srcObject = remoteVideoStreams[socket_id];
         remoteVideoPlayer.load();
-      } else if (event.track.kind == 'audio') {
+      } 
+      else if (event.track.kind == 'audio') {
         let remoteAudioPlayer = document.getElementById('a_' + socket_id);
         remoteAudioStreams[socket_id]
           .getVideoTracks()
-          .forEach((t) => _remoteAudioStreams[socket_id].removeTrack(t));
+          .forEach((t) => remoteAudioStreams[socket_id].removeTrack(t));
         remoteAudioStreams[socket_id].addTrack(event.track);
         remoteAudioPlayer.srcObject = null;
         remoteAudioPlayer.srcObject = remoteAudioStreams[socket_id];
@@ -196,8 +197,8 @@ let Webrtc = (function () {
       peerConnections[socket_id].close();
       peerConnections[socket_id] = null;
     }
-    if (_remoteAudioStreams[socket_id]) {
-      _remoteAudioStreams[socket_id].getTracks().forEach((t) => {
+    if (remoteAudioStreams[socket_id]) {
+      remoteAudioStreams[socket_id].getTracks().forEach((t) => {
         if (t.stop) t.stop();
       });
       remoteAudioStreams[socket_id] = null;

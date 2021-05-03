@@ -111,8 +111,8 @@ button {
 .user-box video {
   margin: 0;
   padding: 0;
-  max-width: 500px;
-  min-height: 300px;
+  width: 500px;
+  height: 300px;
 }
 .room-container h2 {
   color: white;
