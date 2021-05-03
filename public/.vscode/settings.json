@@ -3,7 +3,7 @@
   "liveServer.settings.root": "/",
   "liveServer.settings.CustomBrowser": "chrome",
   "liveServer.settings.https": {
-    "enable": false,
+    "enable": true,
     "cert": "C:/Users/olaer/Desktop/LIA2/webrtc-multi-conn-app-app-ss-node/src/ssl-certificate/localhost.pem",
     "key": "C:/Users/olaer/Desktop/LIA2/webrtc-multi-conn-app-app-ss-node/src/ssl-certificate/localhost.key",
     "passphrase": "12345"
