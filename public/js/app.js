@@ -8,7 +8,7 @@ function appInit() {
   if (!roomId) {
     var roomUrl = window.location.origin + '?roomid=' + new Date().getTime();
     roomLink.setAttribute('href', roomUrl);
-    roomLink.textContent = roomUrl;
+    //roomLink.textContent = roomUrl;
     roomContainer.style.display = 'none';
     roomBox.style.display = 'block';
     return;
@@ -20,11 +20,27 @@ function appInit() {
   }
 
   if (!userId || !roomId) {
-    alert('userid or roomid missing');
+    alert('Nickname or roomid missing!');
     return;
   }
   roomContainer.style.display = 'block';
   roomBox.style.display = 'none';
   Socket.init(userId, roomId);
+
+
+/* userId = null;
+roomId = null;
+document
+  .querySelector('#create-roomBtn')
+  .addEventListener('click', () => createRoomName());
+function createRoomName() {
+  roomId = window.prompt('Enter room name');
+  userId = window.prompt('Enter user name');
+  Socket.init(userId, roomId);
+} */
 }
+
 appInit();
+
+
+
