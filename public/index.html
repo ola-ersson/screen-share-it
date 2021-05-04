@@ -56,9 +56,11 @@
 
       <!-- screen share it html code bellow -->
       <section class="site-container">
-        <div class="room-box" style="display: none">
+        <div class="room-box">
           <div class="buttonContainer">
-          <button id="create-roomBtn" class="dashboardBtn"><a class="room-link" href="#">CREATE ROOM</a></button>
+          <button id="set-user-name" class="dashboardBtn create-roomBtn">Set User Name</button>
+          <button id="set-room-password" class="dashboardBtn create-roomBtn">Room Password</button>
+          <button id="connect-btn" class="dashboardBtn create-roomBtn" style="display: none;">Enter Room</button>
           <button id="roomsBtn" class="dashboardBtn"><div id="bannerOverButton">Coming soon</div>ROOMS</button>         
         </div>
       </div>
@@ -70,9 +72,8 @@
           </div>
           <div>
             <div id="users" class="site-container" style="display: none">
-              
                 <div class="user-box">
-                  <video autoplay muted id="localVideoCtr"  ></video>
+                  <video autoplay muted id="localVideoCtr"></video>
               <div class="tool-box" style="display: none"><div class="usersInfo"><h2 class="users-name">You</h2></div>
                   <button id="btn-screenshare"><i class="fas fa-desktop"></i></button>
                 </div>
@@ -81,7 +82,7 @@
               </div>
               
               <div id="other-template" class="user-box" style="display: none">
-                  <video autoplay muted id="remoteVideoCtr111" ></video>
+                  <video autoplay muted id="remoteVideoCtr" ></video>
                   <div class="usersInfo"><h2 class="users-name"></h2></div>
               </div>
             

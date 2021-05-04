@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
   socket.on('userconnect', (data) => {
-    var otherUsers = userConnections.filter(
+    let otherUsers = userConnections.filter(
       (user) => user.roomId == data.roomId
     );
     userConnections.push({
@@ -36,6 +36,17 @@ io.on('connection', (socket) => {
       .to(data.socketId)
       .emit('exchangeSDP', { message: data.message, socketId: socket.id });
   }); //end of exchangeSDP
+
+  socket.on('stopedScreenShareForRemote', (data) => {
+    let otherUsers = userConnections.filter(
+      (user) => user.roomId == data.roomId
+    );
+    otherUsers.forEach((user) => {
+      socket
+        .to(user.socketId)
+        .emit('informAboutStopedScreenShare', data.socketId);
+    });
+  });
 
   socket.on('disconnect', function () {
     console.log('disconnect');
