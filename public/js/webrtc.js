@@ -187,8 +187,8 @@ let Webrtc = (function () {
       peerConnections[socket_id].close();
       peerConnections[socket_id] = null;
     }
-    if (_remoteAudioStreams[socket_id]) {
-      _remoteAudioStreams[socket_id].getTracks().forEach((t) => {
+    if (remoteAudioStreams[socket_id]) {
+      remoteAudioStreams[socket_id].getTracks().forEach((t) => {
         if (t.stop) t.stop();
       });
       remoteAudioStreams[socket_id] = null;
