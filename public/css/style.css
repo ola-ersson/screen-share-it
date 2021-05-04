@@ -69,7 +69,7 @@ button {
   justify-content: center;
   align-items: center;
 }
-#create-roomBtn {
+.create-roomBtn {
   background-color: #525252;
   height: 38px;
   width: 180px;
@@ -77,10 +77,10 @@ button {
   border-bottom: 4px solid #312f2f;
   border-left: 1px solid #312f2f;
 }
-#create-roomBtn:hover {
+.create-roomBtn:hover {
   background-color: #665d74;
 }
-#create-roomBtn:active {
+.create-roomBtn:active {
   background-color: #302f2f;
   border-width: 0px;
 }
@@ -191,10 +191,10 @@ button {
   justify-content: center;
   margin: auto;
 }
-.users-container{
+.users-container {
   justify-content: flex-end;
 }
-.user-box { 
+.user-box {
   z-index: 1;
   position: relative;
   margin-left: 20px;
@@ -217,7 +217,7 @@ button {
   object-fit: fill;
   z-index: 2;
 }
-.usersInfo{
+.usersInfo {
   z-index: 4;
   position: absolute;
   border-radius: 12px;
@@ -243,7 +243,7 @@ button {
 }
 .whatever-wrapper {
   display: flex;
-  
+
   justify-content: center;
   align-items: center;
 }

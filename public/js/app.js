@@ -1,5 +1,7 @@
+let userId = '';
+let roomId = '';
 function appInit() {
-  const urlParams = new URLSearchParams(window.location.search);
+  /*   const urlParams = new URLSearchParams(window.location.search);
   var roomId = urlParams.get('roomid');
   let roomLink = document.querySelector('.room-link');
   var roomContainer = document.querySelector('.room-container');
@@ -28,7 +30,7 @@ function appInit() {
   Socket.init(userId, roomId);
 
 
-/* userId = null;
+userId = null;
 roomId = null;
 document
   .querySelector('#create-roomBtn')
@@ -38,9 +40,33 @@ function createRoomName() {
   userId = window.prompt('Enter user name');
   Socket.init(userId, roomId);
 } */
+
+  let userName = document.querySelector('#set-user-name');
+  let password = document.querySelector('#set-room-password');
+  let connectBtn = document.querySelector('#connect-btn');
+  let roomContainer = document.querySelector('.room-container');
+  let roomBox = document.querySelector('.room-box');
+
+  userName.addEventListener('click', () => {
+    userId = window.prompt('Enter Name..');
+    userName.textContent = `Username: ${userId}`;
+    showEnterRoom();
+  });
+  password.addEventListener('click', () => {
+    roomId = window.prompt('Enter Password..');
+    password.textContent = `Password: ${roomId}`;
+    showEnterRoom();
+  });
+  function showEnterRoom() {
+    if (!userId == '' && !roomId == '') {
+      connectBtn.style.display = 'block';
+    }
+  }
+  connectBtn.addEventListener('click', () => {
+    roomContainer.style.display = 'block';
+    roomBox.style.display = 'none';
+    Socket.init(userId, roomId);
+  });
 }
 
 appInit();
-
-
-

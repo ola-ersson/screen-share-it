@@ -9,7 +9,7 @@ let Socket = (function () {
     userName = user_name;
     roomId = room_id;
     let roomName = document.querySelector('.room-name');
-    roomName.textContent = `Room id: ${room_id}`;
+    roomName.textContent = `Room password: ${room_id}`;
     document.title = `SSI ${user_name}`;
     SignalServerEventBinding();
     EventBinding();
@@ -21,9 +21,16 @@ let Socket = (function () {
       socket.emit('exchangeSDP', { message: data, socketId: socket_id });
     };
 
+    const stopedScreenShareForRemote = function () {
+      socket.emit('stopedScreenShareForRemote', {
+        socketId: socket.id,
+        roomId: roomId,
+      });
+    };
+
     socket.on('connect', () => {
       if (socket.connected) {
-        Webrtc.init(serverFunction, socket.id);
+        Webrtc.init(serverFunction, stopedScreenShareForRemote, socket.id);
         if (userName != null && roomId != null) {
           socket.emit('userconnect', {
             userName: userName,
@@ -43,13 +50,23 @@ let Socket = (function () {
         });
     });
 
+    /* socket.emit('closeRemoteScreenShare', mySocketId); */
+
     socket.on('informAboutNewConnection', function (data) {
       AddNewUser(data.userName, data.socketId);
       Webrtc.createNewConnection(data.socketId);
     });
 
+    socket.on('informAboutStopedScreenShare', (remote_socket_id) => {
+      let videoElement = document.querySelector(`#v_${remote_socket_id}`);
+      videoElement.style.display == 'block'
+        ? (videoElement.style.display = 'none')
+        : (videoElement.style.display = 'block');
+    });
+
     socket.on('informAboutConnectionEnd', function (socket_id) {
-      document.querySelector(`v_${socket_id}`).remove();
+      console.log('connection end', socket_id);
+      document.querySelector(`#${socket_id}`).remove();
       Webrtc.closeExistingConnection(socket_id);
     });
 
