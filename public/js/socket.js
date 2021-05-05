@@ -9,7 +9,7 @@ let Socket = (function () {
     userName = user_name;
     roomId = room_id;
     let roomName = document.querySelector('.room-name');
-    roomName.textContent = `Room password: ${room_id}`;
+    roomName.textContent = `RoomName : ${room_id}`;
     document.title = `SSI ${user_name}`;
     SignalServerEventBinding();
     EventBinding();

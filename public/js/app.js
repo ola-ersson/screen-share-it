@@ -42,19 +42,19 @@ function createRoomName() {
 } */
 
   let userName = document.querySelector('#set-user-name');
-  let password = document.querySelector('#set-room-password');
+  let roomname = document.querySelector('#set-room-name');
   let connectBtn = document.querySelector('#connect-btn');
   let roomContainer = document.querySelector('.room-container');
   let roomBox = document.querySelector('.room-box');
 
   userName.addEventListener('click', () => {
-    userId = window.prompt('Enter Name..');
-    userName.textContent = `Username: ${userId}`;
+    userId = window.prompt('Enter UserName..');
+    userName.textContent = `UserName  :  ${userId}`;
     showEnterRoom();
   });
-  password.addEventListener('click', () => {
-    roomId = window.prompt('Enter Password..');
-    password.textContent = `Password: ${roomId}`;
+  roomname.addEventListener('click', () => {
+    roomId = window.prompt('Enter RoomName..');
+    roomname.textContent = `RoomName  :  ${roomId}`;
     showEnterRoom();
   });
   function showEnterRoom() {

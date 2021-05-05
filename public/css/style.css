@@ -235,11 +235,9 @@ button {
 }
 .room-container {
   color: white;
-  text-transform: capitalize;
 }
 .room-container h2 {
   color: white;
-  text-transform: capitalize;
 }
 .whatever-wrapper {
   display: flex;
