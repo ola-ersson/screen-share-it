@@ -111,7 +111,7 @@ let Webrtc = (function () {
           .forEach((t) => remoteVideoStreams[socket_id].removeTrack(t));
         remoteVideoStreams[socket_id].addTrack(event.track);
 
-        let remoteVideoPlayer = document.getElementById('v_' + socket_id);
+        let remoteVideoPlayer = document.querySelector(`#v_${socket_id}`);
         remoteVideoPlayer.srcObject = null;
         remoteVideoPlayer.srcObject = remoteVideoStreams[socket_id];
         remoteVideoPlayer.load();
@@ -132,7 +132,7 @@ let Webrtc = (function () {
 
     if (screenShare) {
       if (videoCamSSTrack) {
-        AddUpdateAudioVideoSenders(videoCamSSTrack, rtpVideoSenders);
+        AddUpdateVideoSenders(videoCamSSTrack, rtpVideoSenders);
       }
     }
 
