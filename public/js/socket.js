@@ -64,7 +64,7 @@ let Socket = (function () {
       console.log(data);
       console.log(data.socketId);
       if (data.screenShareStatus == true) {
-        videoElement.style.display == 'block';
+        videoElement.style.display = 'block';
       } else {
         videoElement.style.display = 'none';
       }
