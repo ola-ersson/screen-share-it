@@ -10,7 +10,7 @@ let Socket = (function () {
     roomId = room_id;
     let roomName = document.querySelector('.room-name');
     roomName.textContent = `RoomName : ${room_id}`;
-    document.title = `SSI ${user_name}`;
+    document.title = `ScreenShareIT · ${user_name}`;
     SignalServerEventBinding();
     EventBinding();
   }
@@ -106,7 +106,7 @@ let Socket = (function () {
     videoModal.querySelector('video').id = `v_${socket_id}`; //video to canvas
 
     videoModal.style.display = 'block';
-    document.querySelector('#users').append(videoModal);
+    document.querySelector('.users-container').append(videoModal);
   }
 
   return {

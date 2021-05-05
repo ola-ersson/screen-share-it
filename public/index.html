@@ -3,13 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SSI</title>
+    <title>ScreenShareIT</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <script src="https://kit.fontawesome.com/77f9a0ac97.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <script
+      src="https://kit.fontawesome.com/77f9a0ac97.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
   </head>
   <body>
@@ -19,7 +25,9 @@
         <a class="sign-out">Sign Out</a>
       </nav>
     </header> -->
-
+    <header>
+      <div class="app-title">Screen Share IT.</div>
+    </header>
     <main class="content">
       <!-- auth modals html code bellow -->
       <!-- <div class="auth-wrapper">
@@ -58,34 +66,50 @@
       <section class="site-container">
         <div class="room-box">
           <div class="buttonContainer">
-          <button id="set-user-name" class="dashboardBtn create-roomBtn">Set UserName</button>
-          <button id="set-room-name" class="dashboardBtn create-roomBtn">Set RoomName</button>
-          <button id="connect-btn" class="dashboardBtn create-roomBtn" style="display: none;">Join Room</button>
-          <button id="roomsBtn" class="dashboardBtn"><div id="bannerOverButton">Coming soon</div>ROOMS</button>         
+            <button id="set-user-name" class="dashboardBtn create-roomBtn">
+              Set UserName
+            </button>
+            <button id="set-room-name" class="dashboardBtn create-roomBtn">
+              Set RoomName
+            </button>
+            <button
+              id="connect-btn"
+              class="dashboardBtn create-roomBtn"
+              style="display: none"
+            >
+              Join Room
+            </button>
+            <button id="roomsBtn" class="dashboardBtn">
+              <div id="bannerOverButton">Coming soon</div>
+              ROOMS
+            </button>
+          </div>
         </div>
-      </div>
         <div class="room-container" style="display: none">
           <div class="whatever-wrapper">
             <h1 class="room-name"></h1>
-            
           </div>
-          </div>
-          <div>
-            <div id="users" class="site-container" style="display: none">
-                <div class="user-box">
-                  <video autoplay muted id="localVideoCtr"></video>
-              <div class="tool-box" style="display: none"><div class="usersInfo"><h2 class="users-name">You</h2></div>
-                  <button id="btn-screenshare"><i class="fas fa-desktop"></i></button>
+
+          <div id="users" style="display: none">
+            <div class="users-container">
+              <div class="user-box">
+                <video autoplay muted id="localVideoCtr"></video>
+                <div class="tool-box" style="display: none">
+                  <div class="usersInfo"><h2 class="users-name">You</h2></div>
+                  <button id="btn-screenshare" class="blue">
+                    <i class="fas fa-desktop"></i>
+                  </button>
                 </div>
-               
-                
               </div>
-              
               <div id="other-template" class="user-box" style="display: none">
-                  <video autoplay muted id="remoteVideoCtr" style="display: block"></video>
-                  <div class="usersInfo"><h2 class="users-name"></h2></div>
+                <video
+                  autoplay
+                  muted
+                  id="remoteVideoCtr"
+                  style="display: block"
+                ></video>
+                <div class="usersInfo"><h2 class="users-name"></h2></div>
               </div>
-            
             </div>
           </div>
         </div>

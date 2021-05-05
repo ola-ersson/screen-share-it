@@ -20,8 +20,8 @@ h2 {
 header {
   width: 100%;
   padding: 20px;
-  text-align: right;
-  background-color: rgb(90, 71, 71);
+  text-align: center;
+  background-color: #525252;
 }
 
 header a {
@@ -65,7 +65,7 @@ button {
 .buttonContainer {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 85vh;
   justify-content: center;
   align-items: center;
 }
@@ -123,7 +123,7 @@ button {
   left: 0;
   right: 0;
   text-align: center;
-  background-color: #7e55c5;
+  /* background-color: #7e55c5; */
   opacity: 0.5;
   height: 38px;
   width: 60px;
@@ -187,8 +187,9 @@ button {
 /* screen-share css */
 
 #users {
-  display: flex;
-  justify-content: center;
+  /*   display: flex;
+  justify-content: center; */
+  max-width: 1200px;
   margin: auto;
 }
 .users-container {
@@ -203,7 +204,7 @@ button {
   background-color: #525252;
   float: left;
   justify-content: center;
-  width: 512px;
+  min-width: 512px;
   height: 288px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
@@ -232,16 +233,4 @@ button {
   color: rgb(255, 255, 255);
   opacity: 1;
   z-index: 4;
-}
-.room-container {
-  color: white;
-}
-.room-container h2 {
-  color: white;
-}
-.whatever-wrapper {
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
 }
