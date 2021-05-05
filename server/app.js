@@ -42,9 +42,10 @@ io.on('connection', (socket) => {
       (user) => user.roomId == data.roomId
     );
     otherUsers.forEach((user) => {
-      socket
-        .to(user.socketId)
-        .emit('informAboutStopedScreenShare', data.socketId);
+      socket.to(user.socketId).emit('informAboutStopedScreenShare', {
+        socketId: data.socketId,
+        screenShareStatus: data.screenShareStatus,
+      });
     });
   });
 

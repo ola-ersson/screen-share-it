@@ -1,7 +1,7 @@
 let Socket = (function () {
   let socket = null;
-  const socker_url = 'https://screen-share-it.herokuapp.com/';
-  /* const socker_url = 'http://localhost:3000/'; */
+  /* const socker_url = 'https://screen-share-it.herokuapp.com/'; */
+  const socker_url = 'http://localhost:3000/';
   let roomId = null;
   let userName = null;
 
@@ -21,11 +21,13 @@ let Socket = (function () {
       socket.emit('exchangeSDP', { message: data, socketId: socket_id });
     };
 
-    const stopedScreenShareForRemote = function () {
+    const stopedScreenShareForRemote = function (screen_share_status) {
       socket.emit('stopedScreenShareForRemote', {
         socketId: socket.id,
         roomId: roomId,
+        screenShareStatus: screen_share_status,
       });
+      console.log(screen_share_status);
     };
 
     socket.on('connect', () => {
@@ -57,11 +59,15 @@ let Socket = (function () {
       Webrtc.createNewConnection(data.socketId);
     });
 
-    socket.on('informAboutStopedScreenShare', (remote_socket_id) => {
-      let videoElement = document.querySelector(`#v_${remote_socket_id}`);
-      videoElement.style.display == 'block'
-        ? (videoElement.style.display = 'none')
-        : (videoElement.style.display = 'block');
+    socket.on('informAboutStopedScreenShare', (data) => {
+      let videoElement = document.querySelector(`#v_${data.socketId}`);
+      console.log(data);
+      console.log(data.socketId);
+      if (data.screenShareStatus == true) {
+        videoElement.style.display == 'block';
+      } else {
+        videoElement.style.display = 'none';
+      }
     });
 
     socket.on('informAboutConnectionEnd', function (socket_id) {

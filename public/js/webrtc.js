@@ -34,8 +34,8 @@ let Webrtc = (function () {
     document
       .querySelector('#btn-screenshare')
       .addEventListener('click', async function () {
-        stopedScreenShareForRemote();
         if (screenShare == true) {
+          stopedScreenShareForRemote(false);
           screenShare = false;
           videoCamSSTrack.stop();
           localVideoPlayer.srcObject = null;
@@ -43,6 +43,7 @@ let Webrtc = (function () {
           return;
         }
         try {
+          stopedScreenShareForRemote(true);
           screenShare = true;
           let vstream = null;
           vstream = await navigator.mediaDevices.getDisplayMedia({
