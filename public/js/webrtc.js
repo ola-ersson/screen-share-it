@@ -46,7 +46,7 @@ let Webrtc = (function () {
           screenShare = true;
           let vstream = null;
           vstream = await navigator.mediaDevices.getDisplayMedia({
-            width: { min: 4096 },
+                width: { min: 4096 },
             height: { min: 2160 },
           });
           if (vstream.getVideoTracks().length > 0) {
