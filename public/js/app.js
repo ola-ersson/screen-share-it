@@ -65,7 +65,7 @@ auth.onAuthStateChanged((user) => {
     .set({ roomid: roomId });
   }
 
-  var userId = urlParams.get("userid");
+  /* var userId = urlParams.get("userid");
   if (!userId) {
     userId = window.prompt("Enter your nick!");
   } 
@@ -73,11 +73,11 @@ auth.onAuthStateChanged((user) => {
   if (!userId || !roomId) {
     alert("Nickname or roomid missing!");
     return;
-  }
+  } */
 
   roomContainer.style.display = "block";
   roomBox.style.display = "none";
-  Socket.init(userId, roomId);
+  Socket.init(user.email, roomId);
 
   /* userId = null;
 roomId = null;
