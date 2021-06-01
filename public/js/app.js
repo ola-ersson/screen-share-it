@@ -90,30 +90,3 @@ function createRoomName() {
   Socket.init(userId, roomId);
 } */
 }
-
-
- 
-
-  userName.addEventListener('click', () => {
-    userId = window.prompt('Enter Name..');
-    userName.textContent = `Username: ${userId}`;
-    showEnterRoom();
-  });
-  password.addEventListener('click', () => {
-    roomId = window.prompt('Enter Password..');
-    password.textContent = `Password: ${roomId}`;
-    showEnterRoom();
-  });
-  function showEnterRoom() {
-    if (!userId == '' && !roomId == '') {
-      connectBtn.style.display = 'block';
-    }
-  }
-  connectBtn.addEventListener('click', () => {
-    roomContainer.style.display = 'block';
-    roomBox.style.display = 'none';
-    Socket.init(userId, roomId);
-  });
-
-
-appInit();
