@@ -1,14 +1,15 @@
 let Webrtc = (function () {
   const iceConfiguration = {
     iceServers: [
-      { urls: "stun:stun.l.google.com:19302" },
-      { urls: "stun:stun1.l.google.com:19302" },
+      { urls: 'stun:stun.l.google.com:19302' },
+      { urls: 'stun:stun1.l.google.com:19302' },
     ],
   };
 
   let mySocketId = null;
   let localVideoPlayer = null;
   let serverFunction = null;
+  let stopedScreenShareForRemote = null;
   let peerConnections = [];
   let peerConnectionIds = [];
   let remoteVideoStreams = [];
@@ -17,22 +18,28 @@ let Webrtc = (function () {
   let screenShare = false;
   let videoCamSSTrack;
 
-  async function init(server_function, my_socket_id) {
+  async function init(
+    server_function,
+    stoped_screenshare_for_remote,
+    my_socket_id
+  ) {
     mySocketId = my_socket_id;
     serverFunction = server_function;
-    localVideoPlayer = document.getElementById("localVideoCtr");
+    stopedScreenShareForRemote = stoped_screenshare_for_remote;
+    localVideoPlayer = document.getElementById('localVideoCtr');
     eventBinding();
   }
 
   function eventBinding() {
     document
-      .querySelector("#btn-screenshare")
-      .addEventListener("click", async function () {
+      .querySelector('#btn-screenshare')
+      .addEventListener('click', async function () {
+        stopedScreenShareForRemote();
         if (screenShare == true) {
           screenShare = false;
           videoCamSSTrack.stop();
           localVideoPlayer.srcObject = null;
-          RemoveAudioVideoSenders(rtpVideoSenders);
+          RemoveVideoSenders(rtpVideoSenders);
           return;
         }
         try {
@@ -47,7 +54,7 @@ let Webrtc = (function () {
           if (vstream.getVideoTracks().length > 0) {
             videoCamSSTrack = vstream.getVideoTracks()[0];
             localVideoPlayer.srcObject = new MediaStream([videoCamSSTrack]);
-            AddUpdateAudioVideoSenders(videoCamSSTrack, rtpVideoSenders);
+            AddUpdateVideoSenders(videoCamSSTrack, rtpVideoSenders);
           }
         } catch (e) {
           console.log(e);
@@ -56,16 +63,17 @@ let Webrtc = (function () {
       });
   }
 
-  async function RemoveAudioVideoSenders(rtpSenders) {
+  async function RemoveVideoSenders(rtpSenders) {
     for (let id in peerConnectionIds) {
       if (rtpSenders[id] && IsConnectionAvailable(peerConnections[id])) {
         peerConnections[id].removeTrack(rtpSenders[id]);
         rtpSenders[id] = null;
+        serverFunction();
       }
     }
   }
 
-  async function AddUpdateAudioVideoSenders(track, rtpSenders) {
+  async function AddUpdateVideoSenders(track, rtpSenders) {
     for (let con_id in peerConnectionIds) {
       if (IsConnectionAvailable(peerConnections[con_id])) {
         if (rtpSenders[con_id] && rtpSenders[con_id].track) {
@@ -99,18 +107,18 @@ let Webrtc = (function () {
       if (!remoteAudioStreams[socket_id])
         remoteAudioStreams[socket_id] = new MediaStream();
 
-      if (event.track.kind == "video") {
+      if (event.track.kind == 'video') {
         remoteVideoStreams[socket_id]
           .getVideoTracks()
           .forEach((t) => remoteVideoStreams[socket_id].removeTrack(t));
         remoteVideoStreams[socket_id].addTrack(event.track);
 
-        let remoteVideoPlayer = document.getElementById("v_" + socket_id);
+        let remoteVideoPlayer = document.getElementById('v_' + socket_id);
         remoteVideoPlayer.srcObject = null;
         remoteVideoPlayer.srcObject = remoteVideoStreams[socket_id];
         remoteVideoPlayer.load();
-      } else if (event.track.kind == "audio") {
-        let remoteAudioPlayer = document.getElementById("a_" + socket_id);
+      } else if (event.track.kind == 'audio') {
+        let remoteAudioPlayer = document.getElementById('a_' + socket_id);
         remoteAudioStreams[socket_id]
           .getVideoTracks()
           .forEach((t) => _remoteAudioStreams[socket_id].removeTrack(t));
@@ -174,9 +182,9 @@ let Webrtc = (function () {
   function IsConnectionAvailable(connection) {
     if (
       connection &&
-      (connection.connectionState == "new" ||
-        connection.connectionState == "connecting" ||
-        connection.connectionState == "connected")
+      (connection.connectionState == 'new' ||
+        connection.connectionState == 'connecting' ||
+        connection.connectionState == 'connected')
     ) {
       return true;
     } else return false;
@@ -189,8 +197,8 @@ let Webrtc = (function () {
       peerConnections[socket_id].close();
       peerConnections[socket_id] = null;
     }
-    if (_remoteAudioStreams[socket_id]) {
-      _remoteAudioStreams[socket_id].getTracks().forEach((t) => {
+    if (remoteAudioStreams[socket_id]) {
+      remoteAudioStreams[socket_id].getTracks().forEach((t) => {
         if (t.stop) t.stop();
       });
       remoteAudioStreams[socket_id] = null;
@@ -204,10 +212,13 @@ let Webrtc = (function () {
     }
   }
 
-
   return {
-    init: async function (server_function, my_socket_id) {
-      await init(server_function, my_socket_id);
+    init: async function (
+      server_function,
+      stoped_screenshare_for_remote,
+      my_socket_id
+    ) {
+      await init(server_function, stoped_screenshare_for_remote, my_socket_id);
     },
     ExecuteClientFunction: async function (data, socket_id) {
       await exchangeSDP(data, socket_id);
@@ -218,5 +229,8 @@ let Webrtc = (function () {
     closeExistingConnection: function (socket_id) {
       closeConnection(socket_id);
     },
+    /* stopScreenShareRemote: function (socket_id) {
+      stopScreenShare(socket_id);
+    }, */
   };
 })();
