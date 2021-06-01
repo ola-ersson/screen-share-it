@@ -17,6 +17,7 @@ let Webrtc = (function () {
   let rtpVideoSenders = [];
   let screenShare = false;
   let videoCamSSTrack;
+  const screenShareBtn = document.querySelector('#btn-screenshare');
 
   async function init(
     server_function,
@@ -60,7 +61,14 @@ let Webrtc = (function () {
           console.log(e);
           return;
         }
-      });
+        screenShareBtn.classList.remove('blue');
+        screenShareBtn.classList.add('red');
+        screenShareBtn.innerHTML = '<i class="fas fa-ban fa-lg"></i>';
+      } catch (e) {
+        console.log(e);
+        return;
+      }
+    });
   }
 
   async function RemoveVideoSenders(rtpSenders) {
@@ -113,7 +121,7 @@ let Webrtc = (function () {
           .forEach((t) => remoteVideoStreams[socket_id].removeTrack(t));
         remoteVideoStreams[socket_id].addTrack(event.track);
 
-        let remoteVideoPlayer = document.getElementById('v_' + socket_id);
+        let remoteVideoPlayer = document.querySelector(`#v_${socket_id}`);
         remoteVideoPlayer.srcObject = null;
         remoteVideoPlayer.srcObject = remoteVideoStreams[socket_id];
         remoteVideoPlayer.load();
@@ -134,7 +142,7 @@ let Webrtc = (function () {
 
     if (screenShare) {
       if (videoCamSSTrack) {
-        AddUpdateAudioVideoSenders(videoCamSSTrack, rtpVideoSenders);
+        AddUpdateVideoSenders(videoCamSSTrack, rtpVideoSenders);
       }
     }
 

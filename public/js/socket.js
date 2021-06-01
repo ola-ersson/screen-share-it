@@ -9,8 +9,8 @@ let Socket = (function () {
     userName = user_name;
     roomId = room_id;
     let roomName = document.querySelector('.room-name');
-    roomName.textContent = `Room password: ${room_id}`;
-    document.title = `SSI ${user_name}`;
+    roomName.textContent = `RoomName : ${room_id}`;
+    document.title = `ScreenShareIT · ${user_name}`;
     SignalServerEventBinding();
     EventBinding();
   }
@@ -21,11 +21,13 @@ let Socket = (function () {
       socket.emit('exchangeSDP', { message: data, socketId: socket_id });
     };
 
-    const stopedScreenShareForRemote = function () {
+    const stopedScreenShareForRemote = function (screen_share_status) {
       socket.emit('stopedScreenShareForRemote', {
         socketId: socket.id,
         roomId: roomId,
+        screenShareStatus: screen_share_status,
       });
+      console.log(screen_share_status);
     };
 
     socket.on('connect', () => {
@@ -92,7 +94,7 @@ let Socket = (function () {
     videoModal.querySelector('video').id = `v_${socket_id}`; //video to canvas
 
     videoModal.style.display = 'block';
-    document.querySelector('#users').append(videoModal);
+    document.querySelector('.users-container').append(videoModal);
   }
 
   return {
