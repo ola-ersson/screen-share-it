@@ -97,22 +97,7 @@ button {
   background-color: #302f2f;
   border-width: 0px;
 }
-#bannerOverButton {
-  position: absolute;
-  background-color: red;
-  width: 90px;
-  height: 20px;
-  z-index: -2;
-  top: 0px;
-  left: 10;
-  padding: 2px;
-  border-radius: 10px;
-  transition: 0.1s;
-}
-#roomsBtn:hover #bannerOverButton {
-  top: 40px;
-  height: auto;
-}
+
 
 #btn-screenshare {
   z-index: 3;

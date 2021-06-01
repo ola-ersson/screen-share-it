@@ -13,16 +13,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
   </head>
   <body>
-    <!-- <header>
+    <header>
       <nav>
-        <a class="sign-in">Sign In</a>
-        <a class="sign-out">Sign Out</a>
+        <button class="google-signin">Login with Google</button>
+        <button class="sign-out">Sign out</button>
       </nav>
-    </header> -->
+    </header>
 
     <main class="content">
       <!-- auth modals html code bellow -->
-      <!-- <div class="auth-wrapper">
+     <!--  <div class="auth-wrapper">
         <div class="auth-modal">
           <h2>Login</h2>
           <form class="login">
@@ -57,9 +57,10 @@
       <!-- screen share it html code bellow -->
       <section class="site-container">
         <div class="room-box" style="display: none">
+          <div class="allMyRooms"><ul><li>rum 1</li></ul></div>
           <div class="buttonContainer">
           <button id="create-roomBtn" class="dashboardBtn"><a class="room-link" href="#">CREATE ROOM</a></button>
-          <button id="roomsBtn" class="dashboardBtn"><div id="bannerOverButton">Coming soon</div>ROOMS</button>         
+          <button id="roomsBtn" class="dashboardBtn">JOIN ROOM</button>         
         </div>
       </div>
         <div class="room-container" style="display: none">
@@ -92,16 +93,42 @@
       </section>
       <!-- screen share it html code above -->
     </main>
+
+
+
+
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="/__/firebase/8.3.3/firebase-app.js"></script>
-    <!-- <script src="/__/firebase/8.3.3/firebase-analytics.js"></script>
-    <script src="/__/firebase/8.3.3/firebase-auth.js"></script>
-    <script src="/__/firebase/8.3.3/firebase-firestore.js"></script>
-    <script src="/__/firebase/8.3.3/firebase-functions.js"></script> -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-firestore.js"></script>
+  <script>
+    // Initialize Firebase
+    let config = {
+    apiKey: "AIzaSyDg-21qSI3ssSqmeNq_6QjJ17rSL_YCGH0",
+    authDomain: "screen-share-it-be499.firebaseapp.com",
+    projectId: "screen-share-it-be499",
+    storageBucket: "screen-share-it-be499.appspot.com",
+    messagingSenderId: "929554142764",
+    appId: "1:929554142764:web:e8d5c57ee549d25d03e389",
+    measurementId: "G-PCG71DP8JC"
+  };
+    firebase.initializeApp(config);
+    
+    // make auth and firestore references
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+  
+</script>
+
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+
 
     <!-- Initialize Firebase -->
-    <script src="/__/firebase/init.js"></script>
-    <!-- <script src="js/app.js"></script> -->
+    <!-- <script src="/__/firebase/init.js"></script> -->
     <!-- <script src="js/auth.js"></script> -->
     <!-- screen share it js file import bellow -->
     <script src="js/webrtc.js"></script>

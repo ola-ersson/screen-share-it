@@ -6,16 +6,38 @@ const loginForm = document.querySelector('.login');
 const signIn = document.querySelector('.sign-in');
 const signOut = document.querySelector('.sign-out');
 const cancelFormBtn = document.querySelectorAll('.cancel-btn');
+
+const googleSignIn = document.querySelector('.google-signin');
+
 let userName = '';
 
-// toggle modals
+/* // toggle modals
 switchLink.forEach((link) => {
   link.addEventListener('click', () => {
     authModal.forEach((modal) => modal.classList.toggle('active'));
   });
 });
+ */
+//Sign in with google
 
-// sign in
+/* const googleLogin = async (provider) =>{
+    const {additionalUserInfo, user} = await auth.signInWithPopup(provider);
+
+    if(additionalUserInfo.isNewUser) {
+      db.collection('users').doc(user.uid).set({uid: user.uid})
+    }
+
+    appInit(user.uid);
+    
+}
+googleSignIn.addEventListener('click', () => {googleLogin(new firebase.auth.GoogleAuthProvider())});
+
+ */
+
+
+
+
+/* // sign in
 signIn.addEventListener('click', () => {
   authWrapper.classList.add('open');
   authModal[0].classList.add('active');
@@ -81,3 +103,4 @@ firebase.auth().onAuthStateChanged((user) => {
     console.log(userName, 'signed out.');
   }
 });
+ */
