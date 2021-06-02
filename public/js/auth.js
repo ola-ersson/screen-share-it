@@ -1,4 +1,4 @@
-const switchLink = document.querySelectorAll('.switch');
+/*const switchLink = document.querySelectorAll('.switch');
 const authModal = document.querySelectorAll('.auth-modal');
 const authWrapper = document.querySelector('.auth-wrapper');
 const registerForm = document.querySelector('.register');
@@ -11,7 +11,7 @@ const googleSignIn = document.querySelector('.google-signin');
 
 let userName = '';
 
-/* // toggle modals
+ // toggle modals
 switchLink.forEach((link) => {
   link.addEventListener('click', () => {
     authModal.forEach((modal) => modal.classList.toggle('active'));

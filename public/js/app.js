@@ -1,29 +1,29 @@
 const signOut = document.querySelector('.sign-out');
 
-const roomLink = document.querySelector(".room-link");
-  const roomContainer = document.querySelector(".room-container");
-  const roomBox = document.querySelector(".room-box");
+const roomLink = document.querySelector('.room-link');
+const roomContainer = document.querySelector('.room-container');
+const roomBox = document.querySelector('.room-box');
 
-const googleSignIn = document.querySelector(".google-signin");
+const googleSignIn = document.querySelector('.google-signin');
+/* let userName = ''; */
 
-  //Sign in with google
-  const googleLogin = async (provider) => {
-    const { additionalUserInfo, user } = await auth.signInWithPopup(provider);
+//Sign in with google
+const googleLogin = async (provider) => {
+  const { additionalUserInfo, user } = await auth.signInWithPopup(provider);
 
-    if (additionalUserInfo.isNewUser) {
-      db.collection("users").doc(user.uid).set({ uid: user.uid });
-    }
+  if (additionalUserInfo.isNewUser) {
+    db.collection('users').doc(user.uid).set({ uid: user.uid });
+  }
+};
 
-  };
-
-  googleSignIn.addEventListener("click", () => {
-    googleLogin(new firebase.auth.GoogleAuthProvider());
-  });
-  // sign out
+googleSignIn.addEventListener('click', () => {
+  googleLogin(new firebase.auth.GoogleAuthProvider());
+});
+// sign out
 signOut.addEventListener('click', () => {
   auth.signOut();
-  roomContainer.style.display = "none";
-  roomBox.style.display = "none";
+  roomContainer.style.display = 'none';
+  roomBox.style.display = 'none';
 });
 
 // auth listener
@@ -36,47 +36,42 @@ auth.onAuthStateChanged((user) => {
   } else {
     signOut.style.display = 'none';
     googleSignIn.style.display = 'inline-block';
-
   }
 });
 
-
- function appInit(user) {
+function appInit(user) {
   const urlParams = new URLSearchParams(window.location.search);
-  let roomId = urlParams.get("roomid");
-
+  let roomId = urlParams.get('roomid');
 
   if (!roomId) {
-    var roomUrl = window.location.origin + "?roomid=" + new Date().getTime();
+    var roomUrl = window.location.origin + '?roomid=' + new Date().getTime();
 
-   
-    roomLink.setAttribute("href", roomUrl);
+    roomLink.setAttribute('href', roomUrl);
     //roomLink.textContent = roomUrl;
-    roomContainer.style.display = "none";
-    roomBox.style.display = "block";
+    roomContainer.style.display = 'none';
+    roomBox.style.display = 'block';
     return;
   }
 
-  if(roomId) {
-    db.collection("users")
-    .doc(user.uid)
-    .collection("usersRooms")
-    .doc(roomId)
-    .set({ roomid: roomId });
+  if (roomId) {
+    db.collection('users')
+      .doc(user.uid)
+      .collection('usersRooms')
+      .doc(roomId)
+      .set({ roomid: roomId });
   }
 
   /* var userId = urlParams.get("userid");
   if (!userId) {
     userId = window.prompt("Enter your nick!");
   } 
-
   if (!userId || !roomId) {
     alert("Nickname or roomid missing!");
     return;
   } */
 
-  roomContainer.style.display = "block";
-  roomBox.style.display = "none";
+  roomContainer.style.display = 'block';
+  roomBox.style.display = 'none';
   Socket.init(user.email, roomId);
 
   /* userId = null;

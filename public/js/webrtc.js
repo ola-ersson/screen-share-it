@@ -17,6 +17,7 @@ let Webrtc = (function () {
   let rtpVideoSenders = [];
   let screenShare = false;
   let videoCamSSTrack;
+  const screenShareBtn = document.querySelector('#btn-screenshare');
 
   async function init(
     server_function,
@@ -31,36 +32,39 @@ let Webrtc = (function () {
   }
 
   function eventBinding() {
-    document
-      .querySelector('#btn-screenshare')
-      .addEventListener('click', async function () {
-        stopedScreenShareForRemote();
-        if (screenShare == true) {
-          screenShare = false;
-          videoCamSSTrack.stop();
-          localVideoPlayer.srcObject = null;
-          RemoveVideoSenders(rtpVideoSenders);
-          return;
+    screenShareBtn.addEventListener('click', async function () {
+      if (screenShare == true) {
+        stopedScreenShareForRemote(false);
+        screenShare = false;
+        videoCamSSTrack.stop();
+        localVideoPlayer.srcObject = null;
+        RemoveVideoSenders(rtpVideoSenders);
+        screenShareBtn.classList.remove('red');
+        screenShareBtn.classList.add('blue');
+        screenShareBtn.innerHTML = '<i class="fas fa-desktop fa-lg"></i>';
+        return;
+      }
+      try {
+        stopedScreenShareForRemote(true);
+        screenShare = true;
+        let vstream = null;
+        vstream = await navigator.mediaDevices.getDisplayMedia({
+          width: { min: 4096 },
+          height: { min: 2160 },
+        });
+        if (vstream.getVideoTracks().length > 0) {
+          videoCamSSTrack = vstream.getVideoTracks()[0];
+          localVideoPlayer.srcObject = new MediaStream([videoCamSSTrack]);
+          AddUpdateVideoSenders(videoCamSSTrack, rtpVideoSenders);
         }
-        try {
-          screenShare = true;
-          let vstream = null;
-          vstream = await navigator.mediaDevices.getDisplayMedia({
-            audio: true,
-            video: true
-           /*  width: { min: 4096 },
-            height: { min: 2160 }, */
-          });
-          if (vstream.getVideoTracks().length > 0) {
-            videoCamSSTrack = vstream.getVideoTracks()[0];
-            localVideoPlayer.srcObject = new MediaStream([videoCamSSTrack]);
-            AddUpdateVideoSenders(videoCamSSTrack, rtpVideoSenders);
-          }
-        } catch (e) {
-          console.log(e);
-          return;
-        }
-      });
+        screenShareBtn.classList.remove('blue');
+        screenShareBtn.classList.add('red');
+        screenShareBtn.innerHTML = '<i class="fas fa-ban fa-lg"></i>';
+      } catch (e) {
+        console.log(e);
+        return;
+      }
+    });
   }
 
   async function RemoveVideoSenders(rtpSenders) {

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -27,14 +29,20 @@
     </header>
 
     <main class="content">
-        <!-- screen share it html code bellow -->
+      <!-- screen share it html code bellow -->
       <section class="site-container">
         <div class="room-box" style="display: none">
-          <div class="allMyRooms"><ul><li>rum 1</li></ul></div>
+          <div class="allMyRooms">
+            <ul>
+              <li>rum 1</li>
+            </ul>
+          </div>
           <div class="buttonContainer">
-          <button id="create-roomBtn" class="dashboardBtn"><a class="room-link" href="#">CREATE ROOM</a></button>
-          <button id="roomsBtn" class="dashboardBtn">JOIN ROOM</button>         
-        </div>
+            <button id="create-roomBtn" class="dashboardBtn">
+              <a class="room-link" href="#">CREATE ROOM</a>
+            </button>
+            <button id="roomsBtn" class="dashboardBtn">JOIN ROOM</button>
+          </div>
         </div>
         <div class="room-container" style="display: none">
           <div class="whatever-wrapper">
@@ -69,7 +77,7 @@
       <!-- screen share it html code above -->
     </main>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    
   <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-firestore.js"></script>
@@ -92,12 +100,10 @@
 
   
 </script>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-
-
     <!-- Initialize Firebase -->
     <!-- <script src="/__/firebase/init.js"></script> -->
     <!-- <script src="js/auth.js"></script> -->
+
     <!-- screen share it js file import bellow -->
     <script src="js/webrtc.js"></script>
     <script src="js/socket.js"></script>
