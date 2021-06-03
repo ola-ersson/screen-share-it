@@ -1,7 +1,7 @@
 let Socket = (function () {
   let socket = null;
-  const socker_url = 'https://screen-share-it.herokuapp.com/';
-  /* const socker_url = 'http://localhost:3000/'; */
+  /* const socker_url = 'https://screen-share-it.herokuapp.com/'; */
+  const socker_url = 'http://localhost:3000/';
   let roomId = null;
   let userName = null;
 

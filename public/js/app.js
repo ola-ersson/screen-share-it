@@ -14,11 +14,15 @@ const googleLogin = async (provider) => {
   if (additionalUserInfo.isNewUser) {
     db.collection('users').doc(user.uid).set({ uid: user.uid });
   }
+  getUserRooms(user);
 };
 
 googleSignIn.addEventListener('click', () => {
   googleLogin(new firebase.auth.GoogleAuthProvider());
 });
+
+
+
 // sign out
 signOut.addEventListener('click', () => {
   auth.signOut();
@@ -29,6 +33,7 @@ signOut.addEventListener('click', () => {
 // auth listener
 auth.onAuthStateChanged((user) => {
   if (user) {
+    getUserRooms(user);
     appInit(user);
     googleSignIn.style.display = 'none';
     signOut.style.display = 'inline-block';
