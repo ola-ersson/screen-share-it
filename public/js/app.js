@@ -39,6 +39,32 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
+function getUserRooms(user) {
+  const roomsList = document.querySelector('.room-list');
+
+  function storeRooms(doc) {
+    let li = document.createElement('li');
+    let room = document.createElement('span');
+    
+    li.setAttribute('data-id', doc.id);
+    li.textContent = doc.data().roomid;
+
+    roomsList.appendChild(li);
+  }
+
+  db.collection('users')
+  .doc(user.uid)
+  .collection('usersRooms')
+  .get().then((snapshot) => {
+  snapshot.docs.forEach(doc => {
+    storeRooms(doc);
+    console.log('hello');
+    /* let userRooms = doc.data();
+    console.log(userRooms); */
+    });
+  });
+}
+
 function appInit(user) {
   const urlParams = new URLSearchParams(window.location.search);
   let roomId = urlParams.get('roomid');
