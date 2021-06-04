@@ -49,12 +49,15 @@ function getUserRooms(user) {
 
   function storeRooms(doc) {
     let li = document.createElement('li');
-    let room = document.createElement('span');
     
     li.setAttribute('data-id', doc.id);
     li.textContent = doc.data().roomid;
 
     roomsList.appendChild(li);
+
+    let roomNumber = li.innerHTML;
+    let savedRoomUrl = 'http://127.0.0.1:5501/' + '?roomid=' + roomNumber;
+    console.log(savedRoomUrl);
   }
 
   db.collection('users')
@@ -63,7 +66,7 @@ function getUserRooms(user) {
   .get().then((snapshot) => {
   snapshot.docs.forEach(doc => {
     storeRooms(doc);
-    console.log('hello');
+    //console.log('hello');
     /* let userRooms = doc.data();
     console.log(userRooms); */
     });
