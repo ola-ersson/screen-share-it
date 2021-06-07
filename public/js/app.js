@@ -16,10 +16,20 @@ let roomLinkInfo = null;
   allow read, write: if request.auth.uid !=null;
 } */
 
+// create copy input
+function copyRoomUrl(roomUrl) {
+  let copyRoomId = document.createElement('input');
+  copyRoomId.setAttribute('value', roomUrl);
+  document.body.appendChild(copyRoomId);
+  copyRoomId.select();
+  document.execCommand('copy');
+  copyRoomId.parentNode.removeChild(copyRoomId);
+}
+
 // bind room url function
 function bindRoomURL(roomUrl) {
   document.querySelector('.copy-link-btn').addEventListener('click', () => {
-    console.log(roomUrl);
+    copyRoomUrl(roomUrl);
   });
 }
 
@@ -102,12 +112,13 @@ function buttonBindings() {
       let roomId = node.parentNode.getAttribute('roomid');
       let roomUrl = `${window.location.origin}?roomid=${roomId}`;
       // copy link
-      let copyRoomId = document.createElement('input');
+      copyRoomUrl(roomUrl);
+      /* let copyRoomId = document.createElement('input');
       copyRoomId.setAttribute('value', roomUrl);
       document.body.appendChild(copyRoomId);
       copyRoomId.select();
       document.execCommand('copy');
-      copyRoomId.parentNode.removeChild(copyRoomId);
+      copyRoomId.parentNode.removeChild(copyRoomId); */
     });
   });
 
