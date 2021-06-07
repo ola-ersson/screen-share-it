@@ -35,30 +35,32 @@ function bindRoomURL(roomUrl) {
 
 // join room
 document.querySelector('.join-room-btn').addEventListener('click', async () => {
+  let roomName = null;
   roomUrl = window.prompt('Enter room link');
-  window.history.pushState({}, userName, roomUrl);
+  if (roomUrl !== '' && roomUrl !== null && roomUrl !== undefined) {
+    await db
+      .collection('rooms')
+      .doc(roomId)
+      .get()
+      .then((snapshot) => {
+        roomName = snapshot.data().roomname;
+        roomNameBox.textContent = `RoomName : ${roomName}`;
+        if (snapshot.data().creator !== user.uid) {
+          db.collection('users')
+            .doc(user.uid)
+            .collection('usersRooms')
+            .doc(roomId)
+            .set({ roomname: roomName });
+        }
+        bindRoomURL(roomUrl);
+      });
+    window.history.pushState({}, userName, roomUrl);
+  } else {
+    return;
+  }
   joinRoomContainer.style.display = 'none';
   roomContainer.style.display = 'block';
-  const urlParams = new URLSearchParams(window.location.search);
-  let roomId = urlParams.get('roomid');
   Socket.init(user.displayName, roomId);
-  let roomName = '';
-  await db
-    .collection('rooms')
-    .doc(roomId)
-    .get()
-    .then((snapshot) => {
-      roomName = snapshot.data().roomname;
-      roomNameBox.textContent = `RoomName : ${roomName}`;
-      if (snapshot.data().creator !== user.uid) {
-        db.collection('users')
-          .doc(user.uid)
-          .collection('usersRooms')
-          .doc(roomId)
-          .set({ roomname: roomName });
-      }
-      bindRoomURL(roomUrl);
-    });
 });
 
 // create room
@@ -77,8 +79,10 @@ document
             .doc(docRef.id)
             .set({ roomname: roomname, creator: true });
         });
+    } else {
+      return;
     }
-    window.location.replace(window.location.origin);
+    /* window.location.replace(window.location.origin); */
   });
 
 // leave room
