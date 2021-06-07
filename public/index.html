@@ -1,13 +1,10 @@
-
-
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ScreenShareIT</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <script
@@ -22,33 +19,38 @@
   </head>
   <body>
     <header>
-      <nav>
-        <button class="google-signin">Login with Google</button>
-        <button class="sign-out">Sign out</button>
-      </nav>
+      <div class="app-title">Screen Share IT.</div>
     </header>
-
     <main class="content">
-      <!-- screen share it html code bellow -->
       <section class="site-container">
-        <div class="room-box" style="display: none">
-          <div class="allMyRooms">
-            <ul>
-              <li>rum 1</li>
-            </ul>
-          </div>
-          <div class="buttonContainer">
-            <button id="create-roomBtn" class="dashboardBtn">
-              <a class="room-link" href="#">CREATE ROOM</a>
-            </button>
-            <button id="roomsBtn" class="dashboardBtn">JOIN ROOM</button>
+        <div class="login-container">
+          <button class="google-signin room-btn big-btn" style="display: none">
+            SIGN IN WITH GOOGLE
+          </button>
+        </div>
+        <div class="join-room-container" style="display: none">
+          <div class="join-room-wrapper">
+            <div class="join-room">
+              <h1 class="join-rooms-heading">YOUR ROOM LIST</h1>
+              <ul class="room-list"></ul>
+              <div class="join-room-btn-wrapper">
+                <button class="join-room-btn room-btn l-btn">
+                  JOIN A NEW ROOM
+                </button>
+                <button class="create-room-btn room-btn l-btn">
+                  <a class="room-link" href="#">CREATE A NEW ROOM</a>
+                </button>
+                <button class="sign-out room-btn l-btn">SIGN OUT</button>
+              </div>
+            </div>
           </div>
         </div>
         <div class="room-container" style="display: none">
           <div class="whatever-wrapper">
+            <button class="copy-link-btn room-btn m-btn">COPY ROOM LINK</button>
             <h1 class="room-name"></h1>
+            <button class="leave-room-btn room-btn m-btn">EXIT ROOM</button>
           </div>
-
           <div id="users" style="display: none">
             <div class="users-container">
               <div class="user-box">
@@ -74,40 +76,32 @@
         </div>
         <div style="clear: both"></div>
       </section>
-      <!-- screen share it html code above -->
     </main>
 
-    
-  <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-firestore.js"></script>
-  <script>
-    // Initialize Firebase
-    let config = {
-    apiKey: "AIzaSyDg-21qSI3ssSqmeNq_6QjJ17rSL_YCGH0",
-    authDomain: "screen-share-it-be499.firebaseapp.com",
-    projectId: "screen-share-it-be499",
-    storageBucket: "screen-share-it-be499.appspot.com",
-    messagingSenderId: "929554142764",
-    appId: "1:929554142764:web:e8d5c57ee549d25d03e389",
-    measurementId: "G-PCG71DP8JC"
-  };
-    firebase.initializeApp(config);
-    
-    // make auth and firestore references
-    const auth = firebase.auth();
-    const db = firebase.firestore();
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-firestore.js"></script>
+    <script>
+      // Initialize Firebase
+      let config = {
+        apiKey: 'AIzaSyDg-21qSI3ssSqmeNq_6QjJ17rSL_YCGH0',
+        authDomain: 'screen-share-it-be499.firebaseapp.com',
+        projectId: 'screen-share-it-be499',
+        storageBucket: 'screen-share-it-be499.appspot.com',
+        messagingSenderId: '929554142764',
+        appId: '1:929554142764:web:e8d5c57ee549d25d03e389',
+        measurementId: 'G-PCG71DP8JC',
+      };
+      firebase.initializeApp(config);
 
-  
-</script>
+      // make auth and firestore references
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+    </script>
     <!-- Initialize Firebase -->
     <!-- <script src="/__/firebase/init.js"></script> -->
-    <!-- <script src="js/auth.js"></script> -->
-
-    <!-- screen share it js file import bellow -->
     <script src="js/webrtc.js"></script>
     <script src="js/socket.js"></script>
     <script src="js/app.js"></script>
-    <!-- screen share it js file import above -->
   </body>
 </html>

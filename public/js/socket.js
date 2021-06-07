@@ -1,15 +1,13 @@
 let Socket = (function () {
   let socket = null;
   const socker_url = 'https://screen-share-it.herokuapp.com/';
-  /* const socker_url = 'http://localhost:3000/'; */
+  //const socker_url = 'http://localhost:3000/';
   let roomId = null;
   let userName = null;
 
   function init(user_name, room_id) {
     userName = user_name;
     roomId = room_id;
-    let roomName = document.querySelector('.room-name');
-    roomName.textContent = `RoomName : ${room_id}`;
     document.title = `ScreenShareIT · ${user_name}`;
     SignalServerEventBinding();
     EventBinding();
@@ -27,7 +25,6 @@ let Socket = (function () {
         roomId: roomId,
         screenShareStatus: screen_share_status,
       });
-      console.log(screen_share_status);
     };
 
     socket.on('connect', () => {
@@ -61,8 +58,6 @@ let Socket = (function () {
 
     socket.on('informAboutStopedScreenShare', (data) => {
       let videoElement = document.querySelector(`#v_${data.socketId}`);
-      console.log(data);
-      console.log(data.socketId);
       if (data.screenShareStatus == true) {
         videoElement.style.display = 'block';
       } else {
@@ -71,7 +66,6 @@ let Socket = (function () {
     });
 
     socket.on('informAboutConnectionEnd', function (socket_id) {
-      console.log('connection end', socket_id);
       document.querySelector(`#${socket_id}`).remove();
       Webrtc.closeExistingConnection(socket_id);
     });
