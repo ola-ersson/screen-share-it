@@ -37,6 +37,7 @@ function bindRoomURL(roomUrl) {
 document.querySelector('.join-room-btn').addEventListener('click', async () => {
   let roomName = null;
   roomUrl = window.prompt('Enter room link');
+  let roomId = roomUrl.split('=').pop();
   if (roomUrl !== '' && roomUrl !== null && roomUrl !== undefined) {
     await db
       .collection('rooms')
